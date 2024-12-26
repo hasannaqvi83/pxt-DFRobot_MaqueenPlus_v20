@@ -1,4 +1,3 @@
-
 const enum PatrolSpeed {
     //% block="1"
     Speed1 = 1,
@@ -6,7 +5,7 @@ const enum PatrolSpeed {
     Speed2 = 2,
     //% block="3"
     Speed3 = 3,
-    //% block="4"maqueenPlusV2.readLightIntensity(DirectionType.Left)
+    //% block="4"
     Speed4 = 4,
     //% block="5"
     Speed5 = 5,
@@ -76,6 +75,7 @@ namespace maqueenPlusV2 {
         //% block="R2"
         SensorR2,
     };
+
     /**
      * Well known colors for a NeoPixel strip
      */
@@ -416,8 +416,6 @@ namespace maqueenPlusV2 {
         return versionString
     }
     
-   
-
     /** 
     * Set the three primary color:red, green, and blue
     * @param r  , eg: 100
@@ -447,6 +445,7 @@ namespace maqueenPlusV2 {
     export function ledRange(from: number, to: number): number {
         return ((from) << 16) + (2 << 8) + (to);
     }
+
     /**
      * Gets the RGB value of a known color
     */
@@ -456,6 +455,7 @@ namespace maqueenPlusV2 {
     export function colors(color: NeoPixelColors): number {
         return color;
     }
+
     /**
      * Set the color of the specified LEDs
      * @param index  , eg: DigitalPin.P15
@@ -769,14 +769,13 @@ namespace maqueenPlusV2 {
     //% advanced=true
     //% deprecated=true
     export function setMotorType(type: MotorType) {
-
+        // intentionally blank or deprecated
     }
 
     /**
      * ...
      * @param mode to mode ,eg: Intersection.Straight
      */
-    maqueenPlusV2.setRightOrStraightRunMode(RightOrStraight.Straight)
     //% block="At Crossroads %mode"
     //% weight=22
     //% group="V3"
@@ -891,7 +890,6 @@ namespace maqueenPlusV2 {
     /**
      * Set the distance controlled by PID.
      * @param dir to dir ,eg: SpeedDirection.SpeedCW
-     * @param speed to speed ,eg: PatrolSpeed.Speed1
      * @param distance to distance ,eg: 50
      */
 
@@ -929,7 +927,6 @@ namespace maqueenPlusV2 {
 
     /**
      * Set the control angle of PID.
-     * @param speed to speed ,eg: PatrolSpeed.Speed1
      * @param angle to angle ,eg: 90
      */
 
@@ -1027,7 +1024,38 @@ namespace maqueenPlusV2 {
         }
     }
 
+    //-----------------------------------------------------------
+    //
+    //  SERVO SUPPORT FOR P0, P1, P2  (maqueenPlusV2.1)
+    //
+    //-----------------------------------------------------------
+
+    /**
+     * Enumerates the pins that have servo headers on Maqueen Plus V2.1
+     */
+    export enum MyServoPin {
+        //% block="P0"
+        P0 = AnalogPin.P0,
+        //% block="P1"
+        P1 = AnalogPin.P1,
+        //% block="P2"
+        P2 = AnalogPin.P2
+    }
+
+    /**
+     * Set the servo angle on pins P0, P1, or P2 (0 to 180 degrees).
+     * The servo headers are labeled GND, VBAT, P for each of these pins.
+     * @param servoPin The pin the servo is connected to
+     * @param angle The angle from 0 to 180 degrees
+     */
+    //% block="set servo on pin %servoPin to angle %angle"
+    //% angle.min=0 angle.max=180
+    //% weight=5
+    //% group="V3"
+    //% advanced=false
+    export function setServoAngle(servoPin: MyServoPin, angle: number): void {
+        // Standard MakeCode function to write a servo angle to that pin
+        pins.servoWritePin(<number>servoPin, angle);
+    }
+
 }
-
-
-
